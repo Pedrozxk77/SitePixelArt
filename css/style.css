@@ -374,6 +374,8 @@ img {
 .nav-menu {
   display: flex;
   align-items: center;
+  /* aumentar espaçamento ao redor do menu para separar do logo e das ações */
+  margin: 0 2.5rem;
 }
 
 .nav-list {
@@ -1354,8 +1356,9 @@ img {
 
 .character-main {
   position: relative;
-  width: min(100%, 620px);
-  min-height: 420px;
+  /* largura e altura fixas para os cards de personagem */
+  width: 50rem;
+  height: 50rem; /* solicitado: 50rem de altura */
   border-radius: 24px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.14);
