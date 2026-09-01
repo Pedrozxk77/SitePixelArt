@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato | Celeste</title>
+  <meta name="description" content="Página de contato do site Celeste.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Press+Start+2P&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page-body">
+  <div class="page-shell">
+    <header class="page-header">
+      <div class="container page-header-inner">
+        <a href="index.html" class="logo" aria-label="Página inicial Celeste">
+          <img src="img/Celeste_video_game_logo.png" alt="Logo do jogo Celeste" class="navbar-logo">
+        </a>
+
+        <nav class="page-nav" aria-label="Menu principal">
+          <ul class="page-nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="contato.html" class="active">Contato</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="contact-section">
+        <div class="container contact-layout">
+          <div class="contact-intro">
+            <span class="section-label">Contato</span>
+            <h1>Fale com a gente</h1>
+            <p>Se quiser trocar ideias, tirar dúvidas ou comentar sobre o projeto, envie uma mensagem.</p>
+
+            <div class="contact-info-box">
+              <h3>Informações</h3>
+              <ul class="info-list">
+                <li>Nome: Luiz Carlos</li>
+                <li>E-mail: luiz.carlos@email.com</li>
+                <li>Assunto: projeto web / site estático</li>
+              </ul>
+            </div>
+          </div>
+
+          <form class="contact-form" action="#" method="post">
+            <label>
+              Nome
+              <input type="text" name="nome" placeholder="Digite seu nome" required>
+            </label>
+
+            <label>
+              E-mail
+              <input type="email" name="email" placeholder="Digite seu e-mail" required>
+            </label>
+
+            <label>
+              Assunto
+              <input type="text" name="assunto" placeholder="Digite o assunto" required>
+            </label>
+
+            <label>
+              Mensagem
+              <textarea name="mensagem" rows="6" placeholder="Escreva sua mensagem..." required></textarea>
+            </label>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container page-footer-inner">
+        <p>© 2026 Celeste Fan Page</p>
+        <a href="index.html">Voltar para a home</a>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
