@@ -282,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==================== CHARACTER CAROUSEL ====================
   const characterFrames = document.querySelectorAll('.frame');
   const characterMainImage = document.getElementById('character-main-image');
+  const characterMain = document.querySelector('.character-main');
   const characterName = document.getElementById('character-name');
   const characterRole = document.getElementById('character-role');
   const characterDescription = document.getElementById('character-description');
@@ -301,6 +302,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (characterName) characterName.textContent = name;
       if (characterRole) characterRole.textContent = role;
       if (characterDescription) characterDescription.textContent = description;
+      // Marcar o card principal quando Mr. Oshiro for selecionado
+      if (characterMain) {
+        if (name === 'Mr. Oshiro') {
+          characterMain.classList.add('mr-oshiro');
+        } else {
+          characterMain.classList.remove('mr-oshiro');
+        }
+      }
     });
   });
 

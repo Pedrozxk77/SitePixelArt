@@ -58,7 +58,7 @@
   --font-body: var(--font-pixel);
 
   /* Layout */
-  --container-max: 1200px;
+  --container-max: 1400px;
   --header-h: 72px;
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -344,6 +344,11 @@ img {
   justify-content: center;
   z-index: 10;
 }
+/* manter logo com tamanho fixo para que o menu possa crescer */
+.logo {
+  flex: 0 0 auto;
+  margin-right: 12px;
+}
 
 .navbar-logo {
   width: 80px;
@@ -374,8 +379,10 @@ img {
 .nav-menu {
   display: flex;
   align-items: center;
-  /* aumentar espaçamento ao redor do menu para separar do logo e das ações */
-  margin: 0 2.5rem;
+  /* permitir que o menu cresça e ocupe espaço entre logo e ações */
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 4rem;
 }
 
 .nav-list {
@@ -383,6 +390,11 @@ img {
   align-items: center;
   gap: 36px;
   list-style: none;
+}
+
+/* impedir quebra de linha nos itens da navbar */
+.nav-list {
+  flex-wrap: nowrap;
 }
 
 .nav-link {
@@ -419,6 +431,11 @@ img {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+/* manter ações do header com largura fixa */
+.header-actions {
+  flex: 0 0 auto;
 }
 
 .btn {
@@ -2096,6 +2113,11 @@ img {
 
   .nav-link {
     font-size: 1.1rem;
+
+  /* evitar quebra de linha no texto dos links */
+  .nav-link {
+    white-space: nowrap;
+  }
   }
 
   .mobile-toggle {
