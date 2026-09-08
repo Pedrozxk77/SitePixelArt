@@ -166,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==================== MOBILE MENU TOGGLE ====================
   const mobileToggle = document.getElementById('mobile-toggle');
   const navMenu = document.getElementById('nav-menu');
+  const navClose = document.getElementById('nav-close');
 
   if (mobileToggle && navMenu) {
     const setMenuState = (open) => {
@@ -179,6 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const isOpen = navMenu.classList.contains('open');
       setMenuState(!isOpen);
     });
+
+    if (navClose) {
+      navClose.addEventListener('click', () => setMenuState(false));
+    }
 
     const navLinks = navMenu.querySelectorAll('.nav-link');
     navLinks.forEach(link => {

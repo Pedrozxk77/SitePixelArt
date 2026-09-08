@@ -601,6 +601,37 @@ img {
   transform: rotate(-45deg);
 }
 
+.nav-close {
+  display: none;
+  position: absolute;
+  top: 22px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.nav-close span {
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  background: var(--text-white);
+  border-radius: 999px;
+}
+
+.nav-close span:first-child {
+  transform: rotate(45deg);
+}
+
+.nav-close span:last-child {
+  transform: rotate(-45deg);
+}
+
 /* ==========================================================================
    2. HERO SECTION
    ========================================================================== */
@@ -2204,6 +2235,10 @@ img {
   .nav-link {
     font-size: 1.1rem;
     white-space: nowrap;
+  }
+
+  .nav-close {
+    display: flex;
   }
 
   .mobile-toggle {
