@@ -5,6 +5,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   document.body.classList.add('loading');
 
   const loaderScreen = document.getElementById('loader-screen');
@@ -47,60 +50,90 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // ==================== GSAP INITIAL LOAD ANIMATIONS ====================
-  gsap.from('.nav-item', {
-    opacity: 0,
-    y: -14,
-    duration: 0.7,
-    stagger: 0.08,
-    ease: 'power2.out',
-    delay: 0.1
-  });
+  if (isMobile || reducedMotion) {
+    gsap.set('.nav-item, .hero-content > *, .hero-scene-img, .hero-scene-overlay', { opacity: 1, y: 0, x: 0, scale: 1 });
 
-  gsap.from('.hero-content > *', {
-    opacity: 0,
-    y: 32,
-    duration: 0.9,
-    stagger: 0.12,
-    ease: 'power3.out',
-    delay: 0.2
-  });
-
-  gsap.from('.hero-scene-img, .hero-scene-overlay', {
-    opacity: 0,
-    scale: 1.18,
-    x: 18,
-    duration: 1.3,
-    ease: 'power2.out',
-    delay: 0.25
-  });
-
-  gsap.to('.hero-scene-img', {
-    yPercent: 8,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.hero-section',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true
-    }
-  });
-
-  gsap.utils.toArray('.section-header, .about-content, .about-visual, .feature-mini, .feature-card, .chapter-card, .review-card, .cta-content, .cta-strawberry, .floating-stat').forEach((el) => {
-    gsap.fromTo(el, {
+    gsap.from('.nav-item', {
       opacity: 0,
-      y: 28
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
+      y: -8,
+      duration: 0.35,
+      stagger: 0.04,
       ease: 'power2.out',
+      delay: 0.05
+    });
+
+    gsap.from('.hero-content > *', {
+      opacity: 0,
+      y: 18,
+      duration: 0.45,
+      stagger: 0.06,
+      ease: 'power2.out',
+      delay: 0.12
+    });
+
+    gsap.from('.hero-scene-img, .hero-scene-overlay', {
+      opacity: 0,
+      scale: 1.04,
+      duration: 0.6,
+      ease: 'power2.out',
+      delay: 0.18
+    });
+  } else {
+    gsap.from('.nav-item', {
+      opacity: 0,
+      y: -14,
+      duration: 0.7,
+      stagger: 0.08,
+      ease: 'power2.out',
+      delay: 0.1
+    });
+
+    gsap.from('.hero-content > *', {
+      opacity: 0,
+      y: 32,
+      duration: 0.9,
+      stagger: 0.12,
+      ease: 'power3.out',
+      delay: 0.2
+    });
+
+    gsap.from('.hero-scene-img, .hero-scene-overlay', {
+      opacity: 0,
+      scale: 1.18,
+      x: 18,
+      duration: 1.3,
+      ease: 'power2.out',
+      delay: 0.25
+    });
+
+    gsap.to('.hero-scene-img', {
+      yPercent: 8,
+      ease: 'none',
       scrollTrigger: {
-        trigger: el,
-        start: 'top 82%',
-        once: true
+        trigger: '.hero-section',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
       }
     });
-  });
+
+    gsap.utils.toArray('.section-header, .about-content, .about-visual, .feature-mini, .feature-card, .chapter-card, .review-card, .cta-content, .cta-strawberry, .floating-stat').forEach((el) => {
+      gsap.fromTo(el, {
+        opacity: 0,
+        y: 28
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 82%',
+          once: true
+        }
+      });
+    });
+  }
 
   gsap.utils.toArray('.frame').forEach((frame) => {
     frame.addEventListener('mouseenter', () => {
@@ -190,35 +223,35 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!el.classList.contains('reveal')) {
         el.classList.add('reveal');
       }
+
+      if (isMobile || reducedMotion) {
+        el.classList.add('visible');
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }
     });
   };
 
   revealElements();
 
-  // Intersection Observer for reveal
-  const observerOptions = {
-    threshold: 0.12,
-    rootMargin: '0px 0px -60px 0px'
-  };
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        const siblings = entry.target.parentElement.querySelectorAll('.reveal');
-        let siblingIndex = Array.from(siblings).indexOf(entry.target);
-
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, siblingIndex * 80);
-
-        revealObserver.unobserve(entry.target);
-      }
+  if (!isMobile && !reducedMotion) {
+    gsap.utils.toArray('.reveal').forEach((el) => {
+      gsap.fromTo(el, {
+        opacity: 0,
+        y: 28
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 82%',
+          once: true
+        }
+      });
     });
-  }, observerOptions);
-
-  document.querySelectorAll('.reveal').forEach(el => {
-    revealObserver.observe(el);
-  });
+  }
 
   // ==================== SMOOTH SCROLL FOR ANCHOR LINKS ====================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -243,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==================== PARALLAX EFFECT ON HERO ====================
   const heroScene = document.querySelector('.hero-scene-img');
 
-  if (heroScene) {
+  if (heroScene && !isMobile && !reducedMotion) {
     const handleParallax = () => {
       const scrolled = window.scrollY;
       const rate = scrolled * 0.3;
@@ -254,6 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addEventListener('scroll', handleParallax, { passive: true });
+  } else if (heroScene) {
+    heroScene.style.transform = 'none';
   }
 
   // ==================== FEATURE CARDS 3D TILT & GLOW ====================
@@ -331,6 +366,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const updateChapterStack = () => {
     if (!chaptersSection) return;
 
+    if (isMobile || reducedMotion) {
+      chapterCards.forEach(card => {
+        card.style.transform = 'none';
+        card.style.zIndex = '';
+      });
+      return;
+    }
+
     const sectionRect = chaptersSection.getBoundingClientRect();
     const sectionStart = sectionRect.top + window.scrollY;
     const scrollOffset = window.scrollY + window.innerHeight * 0.8;
@@ -346,8 +389,10 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   updateChapterStack();
-  window.addEventListener('scroll', updateChapterStack, { passive: true });
-  window.addEventListener('resize', updateChapterStack);
+  if (!isMobile && !reducedMotion) {
+    window.addEventListener('scroll', updateChapterStack, { passive: true });
+    window.addEventListener('resize', updateChapterStack);
+  }
 
   // ==================== TYPING / COUNTER ANIMATION ====================
   const animateCounters = () => {

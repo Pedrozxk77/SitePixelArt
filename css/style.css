@@ -132,8 +132,9 @@ body.loaded #app-shell {
   position: fixed;
   inset: 0;
   z-index: 3000;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background:
     radial-gradient(circle at center, rgba(27, 29, 38, 0.92) 0%, rgba(7, 8, 14, 0.98) 38%, rgba(0, 0, 0, 1) 100%);
   transition: opacity 0.9s ease, visibility 0.9s ease;
@@ -149,15 +150,20 @@ body.loaded #app-shell {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 20px;
+  width: min(90vw, 520px);
+  min-height: 100%;
 }
 
 .loader-art-wrap {
   position: relative;
   width: min(52vw, 420px);
+  max-width: 320px;
   aspect-ratio: 1;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   filter: grayscale(calc(1 - (var(--loader-fill, 0) / 100))) brightness(calc(0.38 + (var(--loader-fill, 0) / 160))) saturate(calc(0.25 + (var(--loader-fill, 0) / 100)));
   transition: filter 0.18s linear;
   --loader-fill: 0;
@@ -190,6 +196,7 @@ body.loaded #app-shell {
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  justify-content: center;
 }
 
 .loader-percent {
@@ -2085,6 +2092,54 @@ img {
   .footer-brand {
     max-width: 100%;
   }
+
+  .character-main {
+    width: min(100%, 42rem);
+    height: 38rem;
+  }
+
+  .character-frames {
+    flex-wrap: wrap;
+    width: min(100%, 620px);
+  }
+}
+
+@media (max-width: 900px) {
+  .header-container {
+    padding: 0 18px;
+  }
+
+  .nav-menu {
+    margin: 0 1rem;
+  }
+
+  .nav-list {
+    gap: 20px;
+  }
+
+  .hero-container {
+    padding-top: 24px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero-description {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .hero-platforms {
+    align-items: center;
+  }
+
+  .platforms-icons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2092,13 +2147,15 @@ img {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 280px;
+    width: min(82vw, 320px);
     height: 100vh;
-    background: rgba(6, 7, 20, 0.98);
-    backdrop-filter: blur(20px);
-    padding: 100px 32px 40px;
+    background: rgba(6, 7, 20, 0.97);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 96px 26px 32px;
     transition: right 0.4s var(--ease-out);
     border-left: 1px solid var(--border-subtle);
+    z-index: 999;
   }
 
   .nav-menu.open {
@@ -2113,11 +2170,7 @@ img {
 
   .nav-link {
     font-size: 1.1rem;
-
-  /* evitar quebra de linha no texto dos links */
-  .nav-link {
     white-space: nowrap;
-  }
   }
 
   .mobile-toggle {
@@ -2128,8 +2181,40 @@ img {
     display: none;
   }
 
+  .loader-screen {
+    padding: 24px;
+  }
+
+  .loader-content {
+    width: 100%;
+    max-width: 320px;
+    min-height: auto;
+  }
+
+  .loader-art-wrap {
+    width: min(62vw, 240px);
+    max-width: 240px;
+  }
+
+  .loader-progress-box {
+    width: min(82vw, 300px);
+  }
+
+  .hero-section {
+    padding-top: 86px;
+  }
+
   .hero-title {
     font-size: clamp(2.5rem, 10vw, 3.8rem);
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
   }
 
   .features-grid {
@@ -2153,13 +2238,35 @@ img {
     gap: 16px;
   }
 
-  .hero-cta-group {
-    flex-direction: column;
-    gap: 12px;
+  .character-main {
+    width: 100%;
+    height: 28rem;
   }
 
-  .hero-cta-group .btn {
+  .character-info {
+    padding: 16px 14px 14px;
+  }
+
+  .character-description {
+    max-width: 100%;
+    font-size: 0.7rem;
+  }
+
+  .character-frames {
     width: 100%;
+    gap: 10px;
+  }
+
+  .frame {
+    flex: 0 0 72px;
+    width: 72px;
+    height: 104px;
+  }
+
+  .frame.is-active {
+    flex: 0 0 78px;
+    width: 78px;
+    height: 112px;
   }
 
   .cta-buttons {
@@ -2312,8 +2419,29 @@ body {
     padding: 0 16px;
   }
 
+  .header-container {
+    padding: 0 12px;
+  }
+
+  .navbar-logo {
+    width: 62px;
+  }
+
   .hero-title {
     font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .hero-description {
+    font-size: 0.96rem;
+  }
+
+  .hero-platforms {
+    margin-top: 20px;
+  }
+
+  .platform-chip {
+    width: 70px;
+    height: 48px;
   }
 
   .about-section,
@@ -2322,6 +2450,26 @@ body {
   .reviews-section,
   .cta-section {
     padding: 80px 0;
+  }
+
+  .character-main {
+    height: 22rem;
+  }
+
+  .character-info {
+    padding: 14px 12px 12px;
+  }
+
+  .frame {
+    flex: 0 0 58px;
+    width: 58px;
+    height: 82px;
+  }
+
+  .frame.is-active {
+    flex: 0 0 64px;
+    width: 64px;
+    height: 90px;
   }
 
   .floating-stat {
