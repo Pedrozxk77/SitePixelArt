@@ -135,6 +135,8 @@ body.loaded #app-shell {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  height: 100vh;
   background:
     radial-gradient(circle at center, rgba(27, 29, 38, 0.92) 0%, rgba(7, 8, 14, 0.98) 38%, rgba(0, 0, 0, 1) 100%);
   transition: opacity 0.9s ease, visibility 0.9s ease;
@@ -153,7 +155,9 @@ body.loaded #app-shell {
   justify-content: center;
   gap: 20px;
   width: min(90vw, 520px);
-  min-height: 100%;
+  height: 100%;
+  max-height: 90vh;
+  margin: 0 auto;
 }
 
 .loader-art-wrap {
